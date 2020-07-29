@@ -8,6 +8,7 @@ body {
     -webkit-animation: AnimationName 09s ease infinite;
     -moz-animation: AnimationName 09s ease infinite;
     animation: AnimationName 09s ease infinite;
+    font-size: 20px;
 }
 
 @-webkit-keyframes AnimationName {
@@ -129,7 +130,7 @@ input[type="time"] {
     color: red;
     padding: 1rem;
     font-size: 2rem;
-    text-transform: uppercase;
+    border-radius: 15px;
     text-align: center;
     font-family: 'Staatliches', cursive;
 }

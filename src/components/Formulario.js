@@ -1,48 +1,103 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
+import { v4 as uuid } from 'uuid';
 
-const Formulario = () => {
+const Formulario = ({crearCita}) => {
+
+    //Crear State de Citas
+    const [cita, actualizarCita] = useState({
+        paciente:'',
+        edad:'',
+        fecha:'',
+        hora:'',
+        sintomas:''
+    });
+    const [ error, actualizarError ] = useState(false)
+
+
+    //Funcion de que se ejecuta cada que usuario escribe un input
+    const actualizarState = e => {
+        actualizarCita({
+            ...cita,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    //Extraer los valores
+    const { paciente, edad, fecha, hora, sintomas } = cita;
+
+    //Cuando el usuario presiona agregar cita
+    const submitCita = e => {
+        e.preventDefault();
+
+
+        //validar cita
+        if(paciente.trim()=== '' || edad.trim() === '' || fecha.trim() === '' || hora.trim()=== '' || sintomas.trim()=== ''){
+            actualizarError(true);
+            return;
+        }
+
+        //Eliminar mensaje previo
+        actualizarError(false);
+
+
+        //asignar id
+        cita.id = uuid();
+        
+        //crear cita
+        crearCita(cita);
+
+
+
+
+        //reiniciar form
+        actualizarCita({
+        paciente:'',
+        edad:'',
+        fecha:'',
+        hora:'',
+        sintomas:''
+        })
+    }
+
     return (  
         <Fragment>
             <h2>Crear Cita</h2>
-
-            <form >
+            {error ? <p className="alerta-error">Todos lo campos son obligatorios</p>:null}
+            <form
+                onSubmit={submitCita}
+            
+            >
                 <label>Nombre Paciente:</label>
                 <input
                     type="text"
                     name="paciente"
                     className="u-fullwidth"
                     placeholder="Nombre Paciente"
+                    onChange={actualizarState}
+                    value={paciente}
                 />
                 <label>Edad:</label>
                 <input
                      type="number" 
                      size="6" 
-                     name="age" 
+                     name="edad" 
                      min="18" 
                      max="99" 
-                     value="21"
                      className="u-fullwidth"
+                     onChange={actualizarState}
+                     value={edad}
                     
                 />
-                <label>Genero</label>
-                <input
-                type="radio"
-                value="Femenino"
-                className="u-fullwidth"
-                /> Femenino
-                <input
-                type="radio"
-                value="Masculino"
-                className="u-fullwidth"
-                /> Masculino
 
                 <label>Hora:</label>
                 <input
                     id="time"
-                    label="hora"
+                    name="hora"
                     type="time"
                     defaultValue="00:00"
                     className="u-fullwidth"
+                    onChange={actualizarState}
+                    value={hora}
                 />
                 
                 <label>Fecha:</label>
@@ -50,21 +105,26 @@ const Formulario = () => {
                     type="date"
                     name="fecha"
                     className="u-fullwidth"
+                    onChange={actualizarState}
+                    value={fecha}
 
                 />
                 <label>Sintomas</label>
                 <textarea
                 className="u-full-width"
                 name="sintomas"
+                onChange={actualizarState}
+                value={sintomas}
                 >
                     
                 </textarea>
 
-                <button
+                <button 
+                    id="cita"
                     type="submit"
                     className="u-full-width button-primary"
-
-                >Agregar Cita
+                > 
+                Agregar Cita
 
                 </button>
 
