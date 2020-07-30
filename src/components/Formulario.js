@@ -62,7 +62,7 @@ const Formulario = ({crearCita}) => {
     return (  
         <Fragment>
             <h2>Crear Cita</h2>
-            {error ? <p className="alerta-error">Todos lo campos son obligatorios</p>:null}
+            {error ? <p className="alerta-error">todos lo campos son obligatorios</p>:null}
             <form
                 onSubmit={submitCita}
             

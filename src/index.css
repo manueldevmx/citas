@@ -126,7 +126,7 @@ input[type="time"] {
 }
 
 .alerta-error {
-    background-color: white;
+    background-color: rgb(214, 233, 255);
     color: red;
     padding: 1rem;
     font-size: 2rem;
