@@ -1,7 +1,7 @@
 import React,{Fragment,useState, useEffect} from 'react';
+import styled from '@emotion/styled';
 import Formulario from './components/Formulario';
 import Cita from './components/Cita';
-
 
 
 function App() {
@@ -39,16 +39,19 @@ function App() {
 
   //mensaje condicional
   const titulo = citas.length === 0 ? 'Sin citas' : 'Administra tus citas';
+  
 
 
   return (
   <Fragment>
+
    <h1>Consultas</h1>
    <div className="container">
      <div className="row">
        <div className="one-half column">
             <Formulario
               crearCita={crearCita}
+                
             />
        </div>
        <div className="one-half column">
@@ -62,8 +65,8 @@ function App() {
           ))}
        </div>
      </div>
-
    </div>
+  
    </Fragment>
   );
 }
